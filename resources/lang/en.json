@@ -1,0 +1,13 @@
+{
+  "cruds.reviews.title": "Отзывы",
+  "cruds.reviews.title_singular": "Добавить отзыв",
+  "cruds.reviews.fields.id": "ID",
+  "cruds.reviews.fields.name": "Название",
+  "cruds.reviews.fields.text": "Teкст",
+  "cruds.reviews.fields.desc": "Teкст",
+  "cruds.reviews.fields.sort": "Сотировка",
+  "cruds.reviews.fields.name_helper": "Поле обязательно",
+  "cruds.reviews.fields.content_helper": "Поле обязательно",
+  "cruds.reviews.fields.language": "Язык",
+  "cruds.reviews.fields.language_helper": "Поле обязательно"
+}

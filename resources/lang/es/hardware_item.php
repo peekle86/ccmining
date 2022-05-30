@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'rent' => 'Alquilar',
+    'description' => 'Descripción',
+    'profitability' => 'Rentabilidad',
+    'at_cart' => 'En el carrito',
+    'cancel' => 'Cancelar',
+    'days' => 'Dias',
+    'period' => 'PERÍODO',
+    'hardware' => 'HARDWARE',
+    'price' => 'PRECIO',
+    'day' => 'día',
+    'month' => 'mes',
+    'year' => 'año',
+    'w' => 'W',
+    'profitability' => 'RENTABILIDAD',
+    'power' => 'ENERGÍA',
+    'hashrate' => 'TASA DE HASH',
+    'income' => 'Ingreso',
+    'electricity' => 'Electricidad',
+    'algorithms' => 'Algoritmos',
+    'algorythm' => 'Algoritmo',
+    'hashrate' => 'Tasa de hash',
+    'consumption' => 'Consumo',
+    'profitability' => 'Rentabilidad',
+    'specifications' => 'Especificaciones',
+    'minable_coins' => 'Monedas minables',
+    'period_small' => 'Período',
+    'profit' => 'Ganancia',
+
+];
