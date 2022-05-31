@@ -298,6 +298,16 @@
         </li>
         @can('content_page_access')
             <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.about-page.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/about-page") || request()->is("admin/about-page/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-file c-sidebar-nav-icon">
+
+                    </i>
+                    {{ trans('cruds.aboutPage.title') }}
+                </a>
+            </li>
+        @endcan
+        @can('content_page_access')
+            <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.content-pages.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/content-pages") || request()->is("admin/content-pages/*") ? "c-active" : "" }}">
                     <i class="fa-fw fas fa-file c-sidebar-nav-icon">
 

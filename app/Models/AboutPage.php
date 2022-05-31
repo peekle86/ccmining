@@ -4,17 +4,17 @@ namespace App\Models;
 
 use \DateTimeInterface;
 use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class ContentPage extends Model implements HasMedia
+class AboutPage extends Model implements HasMedia
 {
     use InteractsWithMedia;
     use HasFactory;
 
-    public $table = 'content_pages';
+    public $table = 'about_page';
 
     protected $appends = [
         'featured_image',
@@ -26,9 +26,9 @@ class ContentPage extends Model implements HasMedia
     ];
 
     protected $fillable = [
-        'url',
         'title',
-        'page_text',
+        'first_text',
+        'second_text',
         'excerpt',
         'language_id',
         'created_at',
@@ -61,5 +61,4 @@ class ContentPage extends Model implements HasMedia
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
-    }
-}
+    }}

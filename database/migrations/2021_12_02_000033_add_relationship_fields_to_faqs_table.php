@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRelationshipFieldsToFaqsTable extends Migration
+class AddRelationshipFieldsToFaqsTable1 extends Migration
 {
     public function up()
     {

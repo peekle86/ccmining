@@ -203,6 +203,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('languages/destroy', 'LanguageController@massDestroy')->name('languages.massDestroy');
     Route::resource('languages', 'LanguageController');
 
+    // About Page
+    Route::delete('about-page/destroy', 'AboutPageController@massDestroy')->name('about-page.massDestroy');
+    Route::post('about-page/media', 'AboutPageController@storeMedia')->name('about-page.storeMedia');
+    Route::post('about-page/ckmedia', 'AboutPageController@storeCKEditorImages')->name('about-page.storeCKEditorImages');
+    Route::resource('about-page', 'AboutPageController');
+
     // Content Page
     Route::delete('content-pages/destroy', 'ContentPageController@massDestroy')->name('content-pages.massDestroy');
     Route::post('content-pages/media', 'ContentPageController@storeMedia')->name('content-pages.storeMedia');
