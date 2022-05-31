@@ -144,9 +144,19 @@
   var allEditors = document.querySelectorAll('.ckeditor');
   for (var i = 0; i < allEditors.length; ++i) {
     ClassicEditor.create(
-      allEditors[i], {
-        extraPlugins: [SimpleUploadAdapter]
-      }
+        allEditors[i], {
+            extraPlugins: [SimpleUploadAdapter],
+            htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }
+                ]
+            }
+        }
     );
   }
 });
@@ -154,7 +164,7 @@
 
 <script>
     Dropzone.options.featuredImageDropzone = {
-    url: '{{ route('admin.content-pages.storeMedia') }}',
+    url: '{{ route('admin.about-page.storeMedia') }}',
     maxFilesize: 2, // MB
     acceptedFiles: '.jpeg,.jpg,.png,.gif',
     maxFiles: 1,
