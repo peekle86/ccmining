@@ -42,6 +42,10 @@ class LoginController extends Controller
             return '/admin';
         }
 
+        if (auth()->user()->is_affiliate) {
+            return '/my-affiliate';
+        }
+
         if (auth()->user()->is_operator) {
             return '/operator';
         }

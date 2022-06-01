@@ -57,6 +57,7 @@ class User extends Authenticatable implements HasMedia
         'parent_id',
         'ref_percent',
         'wallet_id',
+        'is_affiliate',
         'created_at',
         'updated_at',
         'deleted_at',

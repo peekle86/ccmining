@@ -65,8 +65,14 @@ class RegisterController extends Controller
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => Hash::make($data['password']),
-            'ref'      => $this->getUniqRef()
+            'ref'      => $this->getUniqRef(),
+            'is_affiliate' => $data['affiliate']
         ]);
+
+        if ($user->is_affiliate !== null) {
+            $this->redirectTo = RouteServiceProvider::AFFILIATE;
+        }
+
         event(new \App\Events\UserReferred(request()->cookie('ref'), $user));
         return $user;
     }

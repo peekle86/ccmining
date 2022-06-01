@@ -10,6 +10,8 @@
                 <form method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
+                    <input name="affiliate" type="hidden" value="{{ request()->get('affiliate') }}">
+
                     <h1>{{ config('app.name') }}</h1>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

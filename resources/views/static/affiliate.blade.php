@@ -56,7 +56,7 @@
 <section class="bg-white">
     <div class="container text-center mx-auto">
         <h3 class="w-full my-2  uppercase">
-                <button type="submit" class="btn main-btn">{{ __('welcome.bec_a_part') }}</button>
+                <a href="{{ route('register', ['affiliate' => true]) }}" class="btn main-btn">{{ __('welcome.bec_a_part') }}</a>
         </h3>
     </div>
 </section>
@@ -188,7 +188,7 @@
                           </div>
                       </div>
                       <div class="pt-5">
-                          <a href="#" class="btn main-btn">{{ __('welcome.bec_a_part') }} »</a>
+                          <a href="{{ route('register', ['affiliate' => true]) }}" class="btn main-btn">{{ __('welcome.bec_a_part') }} »</a>
                       </div>
                   </div>
               </div>
