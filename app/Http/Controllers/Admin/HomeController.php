@@ -52,7 +52,7 @@ class HomeController
                 return Carbon::parse($date->created_at)->format('m-d');
             })->all();
         //ksort($graph_tmp);
-        return getGraph($graph_tmp, $month_count, 'in_usd');
+        return getAdminGraph($graph_tmp, $month_count, 'in_usd');
     }
 
     // public function getGraphEarn($month_count = 1) {
@@ -76,7 +76,7 @@ class HomeController
                 return Carbon::parse($date->created_at)->format('m-d');
             })->all();
         //ksort($graph_tmp);
-        return getGraph($graph_tmp, $month_count, 'in_usd');
+        return getAdminGraph($graph_tmp, $month_count, 'in_usd');
     }
 
     public function getGraphRegistration($month_count = 1) {
@@ -86,7 +86,7 @@ class HomeController
                 return Carbon::parse($date->created_at)->format('m-d');
             })->all();
         //ksort($graph_tmp);
-        return getGraph($graph_tmp, $month_count);
+        return getAdminGraph($graph_tmp, $month_count);
     }
 
     public function getGraphСontract($month_count = 1) {
@@ -97,7 +97,7 @@ class HomeController
                 return Carbon::parse($date->created_at)->format('m-d');
             })->all();
         //ksort($graph_tmp);
-        return getGraph($graph_tmp, $month_count);
+        return getAdminGraph($graph_tmp, $month_count);
     }
 
 

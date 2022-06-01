@@ -97,11 +97,11 @@ class HomeController
     }
     public function getGraphEarn($month_count = 1) {
         $graph_tmp = auth()->user()->userTransactions()->whereStatus(4)->whereType(3)
-        ->whereBetween('created_at', getBetween($month_count))->get()
+        ->whereBetween('created_at', getBetween(auth()->user()->created_at))->get()
         ->groupBy(function($date) {
             return Carbon::parse($date->created_at)->format('m-d');
         })->all();
         //ksort($graph_tmp);
-        return getGraph($graph_tmp, $month_count, 'in_usd');
+        return getGraph($graph_tmp, auth()->user()->created_at, 'in_usd');
     }
 }
