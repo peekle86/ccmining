@@ -52,7 +52,7 @@ class AffiliateController extends Controller
         $graph_tmp = RefStat::where('code', auth()->user()->ref)->select('created_at','count')
             ->whereBetween('created_at', getBetween($month_count))->get()
             ->groupBy(function($date) {
-                return Carbon::parse($date->created_at)->format('m-d');
+                return Carbon::parse($date->created_at)->format('Y-m-d');
             })->all();
         //ksort($graph_tmp);
 
@@ -63,7 +63,7 @@ class AffiliateController extends Controller
         $graph_tmp = User::where('parent_id', auth()->id())->select('created_at')
             ->whereBetween('created_at', getBetween($month_count))->get()
             ->groupBy(function($date) {
-                return Carbon::parse($date->created_at)->format('m-d');
+                return Carbon::parse($date->created_at)->format('Y-m-d');
             })->all();
         //ksort($graph_tmp);
         return getGraph($graph_tmp, $month_count);
@@ -79,7 +79,7 @@ class AffiliateController extends Controller
         return auth()->user()->userTransactions()->whereStatus(4)->whereType(5)
             ->whereBetween('created_at', getBetween($month_count))->get()
             ->groupBy(function($date) {
-                return Carbon::parse($date->created_at)->format('m-d');
+                return Carbon::parse($date->created_at)->format('Y-m-d');
             })->all();
     }
 

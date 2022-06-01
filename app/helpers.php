@@ -17,7 +17,7 @@ if( !function_exists('getGraph') ) {
         $m = array();
         for($i=1; $i<=$month_count; $i++) {
             if( $i == 1 ) {
-                $m[$i]['y'] = (int) date('y');
+                $m[$i]['y'] = (int) date('Y');
                 $m[$i]['m'] = (int) date('m');
             } else {
                 $m[$i]['y'] = ($m[$i-1]['m'] == 1) ? $m[$i-1]['y']-1 : $m[$i-1]['y'];
@@ -43,8 +43,8 @@ if( !function_exists('getGraph') ) {
                     $date = str_pad($i+1, 2, '0', STR_PAD_LEFT);
                     $month = str_pad($val['m'], 2, '0', STR_PAD_LEFT);
 
-                    //$md = $val['y'] . '-' . $month .'-'. $date;
-                    $md = $month .'-'. $date;
+                    $md = $val['y'] . '-' . $month .'-'. $date;
+//                    $md = $month .'-'. $date;
                     $graph['labels'][] = $md;
                     if( isset($graph_data[$md]) ) {
                         //dd($graph_data[$md]);
@@ -73,7 +73,7 @@ if( !function_exists('getGraphCount') ) {
         $m = array();
         for($i=1; $i<=$month_count; $i++) {
             if( $i == 1 ) {
-                $m[$i]['y'] = (int) date('y');
+                $m[$i]['y'] = (int) date('Y');
                 $m[$i]['m'] = (int) date('m');
             } else {
                 $m[$i]['y'] = ($m[$i-1]['m'] == 1) ? $m[$i-1]['y']-1 : $m[$i-1]['y'];
@@ -99,11 +99,11 @@ if( !function_exists('getGraphCount') ) {
                     $month = str_pad($val['m'], 2, '0', STR_PAD_LEFT);
 
                     $md = $val['y'] . '-' . $month .'-'. $date;
-                    $md1 = $month .'-'. $date;
-                    $graph['labels'][] = $md1;
+//                    $md = $month .'-'. $date;
+                    $graph['labels'][] = $md;
 
-                    if( isset($graph_data[$md1]) ) {
-                        $graph['data'][] = $graph_data[$md1][0]->count;
+                    if( isset($graph_data[$md]) ) {
+                        $graph['data'][] = $graph_data[$md][0]->count;
                     } else {
                         $graph['data'][] = 0;
                     }

@@ -85,41 +85,52 @@
 
 @section('scripts')
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.2/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 <script>
     let clicks = {!! json_encode($clicks_graph) !!}
     let registers = {!! json_encode($registrations_graph) !!}
     let earns = {!! json_encode($earns_graph) !!}
 
+
     new Chart(document.getElementById("click_chart"), {
         type: 'line',
         data: {
             labels: clicks.labels,
-            datasets: [{
-                data: clicks.data,
-                label: "{{ __('dashboard._clicks') }}",
-                backgroundColor: '#cdff93',
-                borderColor: 'green',
-                fill: false
-            }, {
-                data: registers.data,
-                label: "{{ __('dashboard._signed_up') }}",
-                backgroundColor: '#90dafb',
-                borderColor: 'blue',
-                fill: false
-            }, {
-                data: earns.data,
-                label: "{{ __('dashboard._earns') }}",
-                backgroundColor: '#ffa9a3',
-                borderColor: 'red',
-                fill: false
-            }
+            datasets: [
+                {
+                    data: clicks.data,
+                    label: "{{ __('dashboard._clicks') }}",
+                    backgroundColor: '#cdff93',
+                    borderColor: 'green',
+                    fill: false
+                }, {
+                    data: registers.data,
+                    label: "{{ __('dashboard._signed_up') }}",
+                    backgroundColor: '#90dafb',
+                    borderColor: 'blue',
+                    fill: false
+                }, {
+                    data: earns.data,
+                    label: "{{ __('dashboard._earns') }}",
+                    backgroundColor: '#ffa9a3',
+                    borderColor: 'red',
+                    fill: false
+                }
             ]
         },
         options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            stacked: false,
             scales: {
                 y: {
-                    min: 0,
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    beginAtZero: true,
                     ticks: {
                         stepSize: 1
                     }
@@ -127,6 +138,44 @@
             }
         }
     });
+
+
+    {{--new Chart(document.getElementById("click_chart"), {--}}
+        {{--type: 'line',--}}
+        {{--data: {--}}
+            {{--labels: clicks.labels,--}}
+            {{--datasets: [{--}}
+                {{--data: clicks.data,--}}
+                {{--label: "{{ __('dashboard._clicks') }}",--}}
+                {{--backgroundColor: '#cdff93',--}}
+                {{--borderColor: 'green',--}}
+                {{--fill: false--}}
+            {{--}, {--}}
+                {{--data: registers.data,--}}
+                {{--label: "{{ __('dashboard._signed_up') }}",--}}
+                {{--backgroundColor: '#90dafb',--}}
+                {{--borderColor: 'blue',--}}
+                {{--fill: false--}}
+            {{--}, {--}}
+                {{--data: earns.data,--}}
+                {{--label: "{{ __('dashboard._earns') }}",--}}
+                {{--backgroundColor: '#ffa9a3',--}}
+                {{--borderColor: 'red',--}}
+                {{--fill: false--}}
+            {{--}--}}
+            {{--]--}}
+        {{--},--}}
+        {{--options: {--}}
+            {{--scales: {--}}
+                {{--y: {--}}
+                    {{--min: 0,--}}
+                    {{--ticks: {--}}
+                        {{--stepSize: 1--}}
+                    {{--}--}}
+                {{--}--}}
+            {{--}--}}
+        {{--}--}}
+    {{--});--}}
 
 
 
