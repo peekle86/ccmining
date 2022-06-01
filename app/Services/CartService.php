@@ -8,20 +8,17 @@ class CartService
 {
     public static function getCartTotal()
     {
-        $total = [];
+        $total = 0;
 
-        $checkouts = auth()->user()->checkouts()->orderByDesc('id')->with('items.algoritm')->simplePaginate();
+        $cartItems = auth()->user()->userCart()->orderByDesc('id')->with('items.algoritm')->simplePaginate();
 
-        foreach($checkouts as $checkout) {
-            if( !isset($total[$checkout->id]) ) {
-                $total[$checkout->id] = 0;
-            }
-            foreach($checkout->items as $item) {
-                $total[$checkout->id] += $item->pivot->price;
+        foreach($cartItems as $item) {
+            foreach($item->items as $hardItem) {
+                $total += $hardItem->pivot->amount;
             }
         }
 
-        return '$' . number_format($total[$checkout->id], 2);
+        return '$' . number_format($total, 2);
     }
 
 

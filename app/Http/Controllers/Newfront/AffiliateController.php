@@ -16,14 +16,12 @@ class AffiliateController extends Controller
 {
     public function index(Request $request)
     {
-        $month_count = 3;
-
         $user = auth()->user();
         $users = $user->referrals()->get();
 
-        $registrations_graph = $this->getGraphRegistration($month_count);
-        $clicks_graph = $this->getGraphClick($month_count);
-        $earns_graph = $this->getGraphEarn($month_count);
+        $registrations_graph = $this->getGraphRegistration();
+        $clicks_graph = $this->getGraphClick();
+        $earns_graph = $this->getGraphEarn();
 
         $clicks = RefStat::where('code', auth()->user()->ref)->sum('count');
         $registrations = $users->count();
@@ -48,36 +46,36 @@ class AffiliateController extends Controller
         return view('newfront.affiliate2', compact('clicks', 'registrations', 'earns', 'clicks_graph', 'registrations_graph', 'earns_graph', 'users', 'ref_earning', 'user', 'setting'));
     }
 
-    public function getGraphClick($month_count = 1) {
+    public function getGraphClick() {
         $graph_tmp = RefStat::where('code', auth()->user()->ref)->select('created_at','count')
-            ->whereBetween('created_at', getBetween($month_count))->get()
+            ->whereBetween('created_at', getBetween(auth()->user()->created_at))->get()
             ->groupBy(function($date) {
                 return Carbon::parse($date->created_at)->format('Y-m-d');
             })->all();
         //ksort($graph_tmp);
 
-        return getGraphCount($graph_tmp, $month_count);
+        return getGraph($graph_tmp, auth()->user()->created_at);
     }
 
-    public function getGraphRegistration($month_count = 1) {
+    public function getGraphRegistration() {
         $graph_tmp = User::where('parent_id', auth()->id())->select('created_at')
-            ->whereBetween('created_at', getBetween($month_count))->get()
+            ->whereBetween('created_at', getBetween(auth()->user()->created_at))->get()
             ->groupBy(function($date) {
                 return Carbon::parse($date->created_at)->format('Y-m-d');
             })->all();
         //ksort($graph_tmp);
-        return getGraph($graph_tmp, $month_count);
+        return getGraph($graph_tmp, auth()->user()->created_at);
     }
 
-    public function getGraphEarn($month_count = 1) {
-        $graph_tmp = $this->dataEarn($month_count);
+    public function getGraphEarn() {
+        $graph_tmp = $this->dataEarn();
         //ksort($graph_tmp);
-        return getGraph($graph_tmp, $month_count, 'amount');
+        return getGraph($graph_tmp, auth()->user()->created_at, 'amount');
     }
 
-    public function dataEarn($month_count) {
+    public function dataEarn() {
         return auth()->user()->userTransactions()->whereStatus(4)->whereType(5)
-            ->whereBetween('created_at', getBetween($month_count))->get()
+            ->whereBetween('created_at', getBetween(auth()->user()->created_at))->get()
             ->groupBy(function($date) {
                 return Carbon::parse($date->created_at)->format('Y-m-d');
             })->all();
