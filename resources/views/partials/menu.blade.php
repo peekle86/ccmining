@@ -417,6 +417,13 @@
             @endcan
         @endif
         <li class="c-sidebar-nav-item">
+            <a href="{{ route("admin.qiwi.index") }}"
+               class="c-sidebar-nav-link {{ request()->is("admin/qiwi") || request()->is("admin/qiwi/*") ? "c-active" : "" }}">
+                <i class="fa-fw fas fa-key c-sidebar-nav-icon"></i>
+                Qiwi Api
+            </a>
+        </li>
+        <li class="c-sidebar-nav-item">
             <a href="#" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                 <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
 

@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="flex justify-between space-x-2">
-        <h1 class="text-2xl font-bold">{{ __('cart.cart') }} {{ __('cart.total') }}: {{ \App\Services\CartService::getCartTotal() }}</h1>
+        <h1 class="text-2xl font-bold">{{ __('cart.cart') }} {{ __('cart.total') }}
+            : {{ \App\Services\CartService::getCartTotal() }}</h1>
 
         <a href="{{ route('newfront.farm') }}"
            class="uppercase mx-auto py-2 px-4 border-2 text-blue-500 border-blue-400 hover:text-blue-400 hover:border-blue-300 rounded items-center flex space-x-1 text-white">
@@ -66,7 +67,7 @@
                             <td class="px-2 py-4 whitespace-nowrap text-center">
                             <span class="
                                 {{ $Farm::getColor($hard->profitability) }}
-                                px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                    px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
                                 $<span x-text="profitability"></span>/{{ __('dashboard._day') }}
                             </span>
                             </td>
@@ -82,7 +83,7 @@
                                             class="p-2 shadow-sm bg-white border rounded-lg">
                                         @foreach ($periods as $period)
                                             <option
-                                                value="{{ $period->id }}">{{ $period->period }} {{ __('dashboard._days') }}</option>
+                                                    value="{{ $period->id }}">{{ $period->period }} {{ __('dashboard._days') }}</option>
                                         @endforeach
                                     </select>
                                 @endif
@@ -196,8 +197,11 @@
                                 </div>
                             </td>
                             <td class="px-2 py-4 text-center whitespace-nowrap">
-                                <div class="text-sm text-gray-900"><span x-text="power"></span><small
-                                        class="text-gray-500 ml-0.5">W</small></div>
+                                <div class="text-sm text-gray-900"><span x-text="power"></span>
+                                    <small
+                                            class="text-gray-500 ml-0.5">W
+                                    </small>
+                                </div>
                             </td>
                             <td class="px-2 py-4 text-center whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ $hard->algoritm->algoritm }}</div>
@@ -205,7 +209,7 @@
                             <td class="px-2 py-4 whitespace-nowrap text-center">
                             <span class="
                                 {{ $Farm::getColor($hard->profitability) }}
-                                px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                    px-2 inline-flex text-xs leading-5 font-semibold rounded-full">
                                 $<span x-text="profitability"></span>/{{ __('dashboard._day') }}
                             </span>
                             </td>
@@ -247,7 +251,7 @@
                                             class="p-2 shadow-sm text-center bg-white border rounded-lg">
                                         @foreach ($periods as $period)
                                             <option
-                                                value="{{ $period->id }}">{{ $period->period }} {{ __('dashboard._days') }}</option>
+                                                    value="{{ $period->id }}">{{ $period->period }} {{ __('dashboard._days') }}</option>
                                         @endforeach
                                     </select>
                                 @endif
@@ -290,19 +294,65 @@
         </div>
     @endif
 
-    <div x-data="checkout()" id="checkout_button">
-        <div x-show="Object.keys(cart_items).length" class="text-center">
-            <button @click="checkout()"
-                    class="mx-auto py-4 px-8 bg-green-600 hover:bg-green-500 rounded items-center flex space-x-1 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                          clip-rule="evenodd"/>
-                </svg>
-                <span>{{ __('dashboard._checkout') }}</span>
-            </button>
+
+    <div class="flex space-x-5">
+
+        <div class="flex-1">
+            <div class="col-4 mb-4">
+                <div class="payment d-flex justify-content-center align-items-center payment_block" data-payment="1">
+                    <button type="button" class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                        <img src="/img/qiwi.svg" alt="">
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex-1">
+            <div class="payment d-flex justify-content-center align-items-center payment_block"
+                 data-payment="2">
+                <button type="button"
+                        class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                    <img src="/img/pay01.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1">
+            <div class="payment d-flex justify-content-center align-items-center payment_block"
+                 data-payment="2">
+                <button type="button"
+                        class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                    <img src="/img/pay02.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1">
+            <div class="payment d-flex justify-content-center align-items-center payment_block"
+                 data-payment="2">
+                <button type="button"
+                        class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                    <img src="/img/mir.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1">
+            <div x-data="checkout()" id="checkout_button">
+                <div x-show="Object.keys(cart_items).length" class="text-center">
+                    <button @click="checkout()"
+                            class="py-3 bg-green-600 hover:bg-green-500 text-white block text-center w-full rounded-lg">
+                        <span>{{ __('dashboard._checkout') }}</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
 
 @endsection
 

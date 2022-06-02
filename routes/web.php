@@ -232,6 +232,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('mails/media', 'MailController@storeMedia')->name('mails.storeMedia');
     Route::post('mails/ckmedia', 'MailController@storeCKEditorImages')->name('mails.storeCKEditorImages');
     Route::resource('mails', 'MailController');
+
+    // Qiwi Api
+    Route::delete('qiwi/destroy', 'QiwiController@massDestroy')->name('qiwi.massDestroy');
+    Route::resource('qiwi', 'QiwiController');
 });
 
 
