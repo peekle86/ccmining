@@ -144,7 +144,7 @@
 @endsection
 
 @section('scripts')
-
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script>
         function cartForm() {
             return {
@@ -223,6 +223,69 @@
                 }
             }]
         });
+
+        const popovers = {};
+        let popoverId = 1;
+        document.querySelectorAll('img[data-toggle=tooltip]').forEach(item => {
+            let tooltip = document.createElement('div');
+            tooltip.id = 'popover-'+popoverId;
+            tooltip.setAttribute('role', 'tooltip');
+            tooltip.innerHTML = item.title + '<div class="arrow" data-popper-arrow></div>';
+            tooltip.classList.add('tooltip');
+            item.before(tooltip);
+
+            item.removeAttribute('title');
+            item.removeAttribute('data-placement');
+            item.dataset.id = tooltip.id;
+
+            popovers[tooltip.id] = {
+                instance: Popper.createPopper(item, tooltip, {
+                    placement: 'top',
+                    modifiers: [
+                        {
+                            name: 'offset',
+                            options: {
+                                offset: [0, 8],
+                            },
+                        },
+                    ],
+                }),
+                img: item,
+                tooltip: tooltip
+            };
+            popoverId++;
+        });
+
+        function show() {
+            let popoverId = this.dataset.id,
+                popover = popovers[popoverId];
+
+            popover.tooltip.setAttribute('data-show', '');
+            popover.instance.update();
+            popover.tooltip.querySelector('div.arrow').style.display = 'block';
+        }
+
+        function hide() {
+            let popoverId = this.dataset.id,
+                popover = popovers[popoverId];
+
+            popover.tooltip.removeAttribute('data-show');
+        }
+
+        const showEvents = ['mouseenter', 'focus'];
+        const hideEvents = ['mouseleave', 'blur'];
+
+        showEvents.forEach(event => {
+            Object.entries(popovers).forEach(([id, popover]) => {
+                popover.img.addEventListener(event, show);
+            })
+        });
+
+        hideEvents.forEach(event => {
+            Object.entries(popovers).forEach(([id, popover]) => {
+                popover.img.addEventListener(event, hide);
+            })
+        });
     </script>
 @endsection
 
@@ -249,5 +312,63 @@
             background: rgb(245, 245, 245);
         }
 
+        img[data-toggle] {
+            border-radius: 50%;
+        }
+        img[data-toggle]:hover {
+            box-shadow: 0px 0px 15px 4px #626262;
+            transform: translate(0, -3px);
+            -webkit-transition: all .2s;
+            transition: all .2s;
+        }
+
+        .tooltip {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            padding: 4px 8px;
+            font-size: 13px;
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+
+        .tooltip[data-show] {
+            display: block;
+        }
+
+        .arrow,
+        .arrow::before {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #333;
+        }
+
+        .arrow {
+            visibility: hidden;
+        }
+
+        .arrow::before {
+            visibility: visible;
+            content: '';
+            transform: rotate(45deg);
+        }
+
+        .tooltip[data-popper-placement^='top'] > .arrow {
+            bottom: -4px;
+        }
+
+        .tooltip[data-popper-placement^='bottom'] > .arrow {
+            top: -4px;
+        }
+
+        .tooltip[data-popper-placement^='left'] > .arrow {
+            right: -4px;
+        }
+
+        .tooltip[data-popper-placement^='right'] > .arrow {
+            left: -4px;
+        }
     </style>
 @endsection
