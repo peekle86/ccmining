@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="flex justify-between">
-        <h1 class="text-2xl font-bold">Operator</h1>
+        <h1 class="text-2xl font-bold">{{ __('operator.title') }}</h1>
     </div>
 
     <div class="flex flex-col md:flex-row md:space-x-10 space-x-0 md:space-y-0 space-y-10">
@@ -20,7 +20,8 @@
                             if( !$avatar ) {
                                 $avatar = substr($chat->user->name, 0, 1);
                             } else {
-                                $avatar = '<img src="'. $avatar .'">';                            }
+                                $avatar = '<img src="'. $avatar .'">';
+                            }
                         }
                         // $avatar = optional($chat->user->avatar)->thumbnail;
                         //if( !$avatar )
@@ -60,7 +61,7 @@
                     <!-- HEADING -->
                     <div class="w-full bg-blue-400 h-16 pt-2 text-white flex justify-center shadow-md"
                         style="top:0px; overscroll-behavior: none;">
-                        <div class="my-3 text-blue-100 font-bold text-lg tracking-wide">Support Chat</div>
+                        <div class="my-3 text-blue-100 font-bold text-lg tracking-wide">{{ __('operator.chat_title') }}</div>
                     </div>
 
                     <!-- MESSAGES -->
@@ -75,7 +76,7 @@
                         <input type="hidden" name="csrf-token" value="{{ csrf_token() }}">
                         <input type="text" name="message" id="message"
                             class="flex-grow m-2 py-2 px-4 mr-1 rounded-full border border-gray-100 bg-gray-50 resize-none"
-                            rows="1" placeholder="Message..." style="outline: none;">
+                            rows="1" placeholder="{{ __('operator.input_placeholder') }}..." style="outline: none;">
                         <button class="m-2" id="btn-save" style="outline: none;">
                             <svg class="svg-inline--fa text-blue-400 fa-paper-plane fa-w-16 w-12 h-12 py-2 mr-2"
                                 aria-hidden="true" focusable="false" data-prefix="fas" data-icon="paper-plane" role="img"
