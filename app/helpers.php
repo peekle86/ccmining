@@ -12,9 +12,9 @@ if( !function_exists('getBetween') ) {
 }
 
 if( !function_exists('getGraph') ) {
-    function getGraph($graph_data, $user_registered, $sum = false) {
+    function getGraph($graph_data, Carbon $user_registered, $sum = false) {
+        $user_registered = $user_registered->startOfDay();
         $days_count = $user_registered->diffInDays(Carbon::now());
-        $days_count = $days_count !== 0 ? $days_count + 1 : $days_count;
         $current_day = $user_registered;
 
         for ($i = 0; $i <= $days_count; $i++) {
