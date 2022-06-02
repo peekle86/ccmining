@@ -25,6 +25,7 @@ class Setting extends Model
         'ref',
         'active',
         'proxy',
+        'ruble_course',
         'created_at',
         'updated_at',
     ];

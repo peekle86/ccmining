@@ -12,7 +12,7 @@
 
                     <input name="affiliate" type="hidden" value="{{ request()->get('affiliate') }}">
 
-                    <h1>{{ config('app.name') }}</h1>
+                    <h1><img src="/img/form_logo.svg" alt=""></h1>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">

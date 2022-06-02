@@ -149,6 +149,7 @@
 
         @yield('scripts')
         <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
 
         <script>
             let price_th = {{ $setting->price_th ?? 0 }};

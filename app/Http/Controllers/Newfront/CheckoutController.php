@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Helpers\CartHelper;
 use App\Models\ContractPeriod;
 use App\Models\Currency;
+use App\Models\PaymentSystem;
 use App\Models\Setting;
 use App\Services\CheckoutService;
+use App\Services\QiwiService;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
@@ -45,5 +49,37 @@ class CheckoutController extends Controller
             'hards',
             'cloud'
         ));
+    }
+
+    public function paymentCheckout(Request $request)
+    {
+        $paymentSystemId = $request->payment;
+
+        $total = \App\Models\User::getUserCheckoutTotal();
+
+        if ($paymentSystemId == PaymentSystem::QIWI ||
+            $paymentSystemId == PaymentSystem::VISA ||
+            $paymentSystemId == PaymentSystem::MASTER_CARD ||
+            $paymentSystemId == PaymentSystem::MIR
+        ) {
+
+            $payment_id = PaymentSystem::QIWI;
+            $cartTotal = $total;
+            $paymentCode = '99999';
+
+            $data = QiwiService::getPaymentData($cartTotal, $payment_id, $paymentCode);
+
+            $paymentHtml = view('newfront.cart.qiwi_payment_block', [
+                'link' => $data['link'],
+                'total' => $data['amount'] . '₽',
+                'note' => $data['note'],
+                'payment_id' => $payment_id,
+            ])->render();
+
+            return response()->json([
+                'payment_html' => $paymentHtml
+            ]);
+
+        }
     }
 }

@@ -458,3 +458,7 @@ body.terms {
 .assic_title:hover{
     color: #44a4ff;
 }
+
+.payment_block_border{
+    border: 3px solid #001745;
+}

@@ -227,4 +227,23 @@ class User extends Authenticatable implements HasMedia
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public static function getUserCheckoutTotal()
+    {
+        $total = 0;
+
+        $checkouts = auth()->user()->checkouts()->orderByDesc('id')->with('items.algoritm')->simplePaginate();
+        foreach($checkouts as $checkout) {
+            if( !isset($total[$checkout->id]) ) {
+                $total = 0;
+            }
+            foreach($checkout->items as $item) {
+                $total += $item->pivot->price;
+            }
+        }
+
+        return $total;
+    }
+
+
 }

@@ -295,45 +295,58 @@
     @endif
 
 
-    <div class="flex space-x-5">
+    <div class="flex space-x-5 cart_payments_block">
 
         <div class="flex-1">
             <div class="col-4 mb-4">
-                <div class="payment d-flex justify-content-center align-items-center payment_block" data-payment="1">
-                    <button type="button" class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="button"
+                            class="payment bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg payment_block"
+                            data-payment="{{ \App\Models\PaymentSystem::QIWI }}">
                         <img src="/img/qiwi.svg" alt="">
                     </button>
                 </div>
             </div>
-
         </div>
 
         <div class="flex-1">
-            <div class="payment d-flex justify-content-center align-items-center payment_block"
-                 data-payment="2">
+            <div class=" d-flex justify-content-center align-items-center">
                 <button type="button"
-                        class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                        class="payment bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg payment_block"
+                        data-payment="{{ \App\Models\PaymentSystem::MASTER_CARD }}">
                     <img src="/img/pay01.svg" alt="">
                 </button>
             </div>
         </div>
 
         <div class="flex-1">
-            <div class="payment d-flex justify-content-center align-items-center payment_block"
-                 data-payment="2">
+            <div class="d-flex justify-content-center align-items-center">
                 <button type="button"
-                        class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                        class="payment bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg payment_block"
+                        data-payment="{{ \App\Models\PaymentSystem::VISA }}">
                     <img src="/img/pay02.svg" alt="">
                 </button>
             </div>
         </div>
 
         <div class="flex-1">
-            <div class="payment d-flex justify-content-center align-items-center payment_block"
-                 data-payment="2">
+            <div class="d-flex justify-content-center align-items-center">
                 <button type="button"
-                        class="bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg">
+                        class="payment bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg payment_block"
+                        data-payment="{{ \App\Models\PaymentSystem::MIR }}">
                     <img src="/img/mir.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1">
+            <div class="d-flex justify-content-center align-items-center">
+                <input id="payment_type" type="hidden" name="payment" value="0">
+                <button type="button"
+                        data-locale="{{ app()->getLocale() }}"
+                        data-url="{{ route('newfront.payment_checkout') }}"
+                        class="py-3 bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg btn_checkout_form">
+                    <span>Оплатить</span>
                 </button>
             </div>
         </div>
@@ -350,7 +363,7 @@
         </div>
     </div>
 
-
+    <div class="seller-info-row"></div>
 
 
 
