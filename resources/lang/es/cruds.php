@@ -436,6 +436,10 @@ return [
     'cart' => [
         'title'          => 'Carts',
         'title_singular' => 'Cart',
+        'unpaid' => [
+            'title' => 'Carros sin pagar',
+            'title_singular' => 'Carrito sin pagar',
+        ],
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',

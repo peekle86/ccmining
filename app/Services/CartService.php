@@ -12,9 +12,9 @@ class CartService
 
         $cartItems = auth()->user()->userCart()->orderByDesc('id')->with('items.algoritm')->simplePaginate();
 
-        foreach($cartItems as $item) {
-            foreach($item->items as $hardItem) {
-                $total += $hardItem->pivot->amount;
+        foreach($cartItems as $cart) {
+            foreach($cart->items as $hardItem) {
+                $total += intval($hardItem->pivot->amount);
             }
         }
 

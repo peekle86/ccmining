@@ -434,6 +434,10 @@ return [
     'cart' => [
         'title'          => 'Carts',
         'title_singular' => 'Cart',
+        'unpaid' => [
+            'title' => 'Неоплаченные корзины',
+            'title_singular' => 'Неоплаченная корзина',
+        ],
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',

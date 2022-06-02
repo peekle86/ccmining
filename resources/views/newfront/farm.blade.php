@@ -986,10 +986,11 @@
                     let hard_id = this.hard.id;
                     let period_id = this.period_id;
                     let percent = this.percent;
+                    let amount = this.price;
                     fetch('{{ route("newfront.cart.add") }}', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-                        body: JSON.stringify({hard_id, period_id, percent})
+                        body: JSON.stringify({hard_id, period_id, percent, amount})
                     })
                         .then(() => {
                             this.cart = true;

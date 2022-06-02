@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('content')
-@can('cart_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.carts.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.cart.title_singular') }}
-            </a>
-        </div>
-    </div>
-@endcan
+{{--@can('cart_create')--}}
+    {{--<div style="margin-bottom: 10px;" class="row">--}}
+        {{--<div class="col-lg-12">--}}
+            {{--<a class="btn btn-success" href="{{ route('admin.carts.create') }}">--}}
+                {{--{{ trans('global.add') }} {{ trans('cruds.cart.title_singular') }}--}}
+            {{--</a>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--@endcan--}}
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.cart.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.cart.unpaid.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
@@ -83,7 +83,7 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.carts.index') }}",
+    ajax: "{{ route('admin.carts.unpaid') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },

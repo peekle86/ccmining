@@ -150,12 +150,12 @@ class CartController extends Controller
     //     $cart->save();
     // }
 
-    // public function payed(Request $request)
-    // {
-    //     $cart = auth()->user()->userCart->where('confirmed', 0)->findOrFail($request->cart_id);
-    //     $cart->confirmed = 1;
-    //     $cart->save();
-    // }
+//     public function payed(Request $request)
+//     {
+//         $cart = auth()->user()->userCart->where('confirmed', 0)->findOrFail($request->cart_id);
+//         $cart->confirmed = 1;
+//         $cart->save();
+//     }
 
     public function getAddress()
     {

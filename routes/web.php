@@ -216,8 +216,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('content-pages', 'ContentPageController');
 
     // Cart
-    // Route::delete('carts/destroy', 'CartController@massDestroy')->name('carts.massDestroy');
-    // Route::resource('carts', 'CartController');
+     Route::delete('carts/destroy', 'CartController@massDestroy')->name('carts.massDestroy');
+     Route::get('carts/unpaid', 'CartController@unpaid')->name('carts.unpaid');
+     Route::resource('carts', 'CartController');
 
     // Checkout
     Route::delete('checkouts/destroy', 'CheckoutController@massDestroy')->name('checkouts.massDestroy');

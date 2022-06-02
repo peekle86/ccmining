@@ -15,6 +15,13 @@
                 {{ trans('global.dashboard') }}
             </a>
         </li>
+        @can('cart_access')
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route("admin.carts.unpaid") }}" class="c-sidebar-nav-link {{ request()->is("admin/carts/unpaid") || request()->is("admin/carts/unpaid*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-shopping-cart c-sidebar-nav-icon"></i>{{ trans('cruds.cart.unpaid.title') }}
+                </a>
+            </li>
+        @endcan
         @can('transaction_management_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/checkouts*") ? "c-show" : "" }} {{ request()->is("admin/withdrawls*") ? "c-show" : "" }} {{ request()->is("admin/balances*") ? "c-show" : "" }} {{ request()->is("admin/transactions*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
