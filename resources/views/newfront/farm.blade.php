@@ -507,30 +507,16 @@
                                                                                        class="text-center mb-5">
                                                                                     <thead>
                                                                                     <tr>
-                                                                                        <th class="text-center w-1/3">
-                                                                                            HASHRATE
-                                                                                        </th>
-                                                                                        <th class="text-center w-1/3">
-                                                                                            POWER
-                                                                                        </th>
-                                                                                        <th class="text-center w-1/3">
-                                                                                            PROFITABILITY
-                                                                                        </th>
+                                                                                        <th class="text-center w-1/3">{{ __('hardware_item.hashrate') }}</th>
+                                                                                        <th class="text-center w-1/3">{{ __('hardware_item.profitability') }}</th>
+                                                                                        <th class="text-center w-1/3">{{ __('hardware_item.profitability') }}</th>
                                                                                     </tr>
                                                                                     </thead>
                                                                                     <tbody>
                                                                                     <tr>
-                                                                                        <td><span
-                                                                                                x-text="hashrate"></span>
-                                                                                            <span x-text="unit"></span>
-                                                                                        </td>
-                                                                                        <td><span x-text="power"></span>
-                                                                                            w
-                                                                                        </td>
-                                                                                        <td>$<span
-                                                                                                x-text="profitability"></span>
-                                                                                            /day
-                                                                                        </td>
+                                                                                        <td><span x-text="hashrate"></span> <span x-text="unit"></span></td>
+                                                                                        <td><span x-text="power"></span> {{ __('hardware_item.w') }}</td>
+                                                                                        <td>$<span x-text="profitability"></span> /{{ __('hardware_item.day') }}</td>
                                                                                     </tr>
                                                                                     </tbody>
                                                                                 </table>
@@ -538,50 +524,29 @@
                                                                                        class="text-center">
                                                                                     <thead>
                                                                                     <tr>
-                                                                                        <th class="text-center w-1/3">
-                                                                                            PRICE ($)
-                                                                                        </th>
-                                                                                        <th class="text-center w-1/3">
-                                                                                            HARDWARE (%)
-                                                                                        </th>
-                                                                                        <th class="text-center w-1/3">
-                                                                                            PERIOD
-                                                                                        </th>
+                                                                                        <th class="text-center w-1/3">{{ __('hardware_item.price') }}($)</th>
+                                                                                        <th class="text-center w-1/3">{{ __('hardware_item.hardware') }} (%)</th>
+                                                                                        <th class="text-center w-1/3">{{ __('hardware_item.period') }}</th>
                                                                                     </tr>
                                                                                     </thead>
                                                                                     <tbody>
                                                                                     <tr>
-                                                                                        <td>$<span
-                                                                                                x-text="price"></span>
-                                                                                        </td>
+                                                                                        <td>$<span x-text="price"></span></td>
                                                                                         <td>
-                                                                                            <select x-model="percent"
-                                                                                                    @change='calc()'
+                                                                                            <select x-model="percent" @change='calc()'
                                                                                                     class="p-2 w-20 bg-white shadow-sm border rounded-lg text-center"
                                                                                                     required>
-                                                                                                <option
-                                                                                                    value=""></option>
-                                                                                                <option value="10">10%
-                                                                                                </option>
-                                                                                                <option value="20">20%
-                                                                                                </option>
-                                                                                                <option value="30">30%
-                                                                                                </option>
-                                                                                                <option value="40">40%
-                                                                                                </option>
-                                                                                                <option value="50">50%
-                                                                                                </option>
-                                                                                                <option value="60">60%
-                                                                                                </option>
-                                                                                                <option value="70">70%
-                                                                                                </option>
-                                                                                                <option value="80">80%
-                                                                                                </option>
-                                                                                                <option value="90">90%
-                                                                                                </option>
-                                                                                                <option value="100">
-                                                                                                    100%
-                                                                                                </option>
+                                                                                                <option value=""></option>
+                                                                                                <option value="10">10%</option>
+                                                                                                <option value="20">20%</option>
+                                                                                                <option value="30">30%</option>
+                                                                                                <option value="40">40%</option>
+                                                                                                <option value="50">50%</option>
+                                                                                                <option value="60">60%</option>
+                                                                                                <option value="70">70%</option>
+                                                                                                <option value="80">80%</option>
+                                                                                                <option value="90">90%</option>
+                                                                                                <option value="100">100%</option>
                                                                                             </select>
                                                                                         </td>
                                                                                         <td>
@@ -591,7 +556,7 @@
                                                                                                 @foreach ($periods as $period)
                                                                                                     <option
                                                                                                         value="{{ $period->id }}">{{ $period->period }}
-                                                                                                        Days
+                                                                                                        {{ __('hardware_item.days') }}
                                                                                                     </option>
                                                                                                 @endforeach
                                                                                             </select>
@@ -608,11 +573,11 @@
                                                                     class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                                                     <button @click="submitData()" type="button"
                                                                             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                                                        RENT
+                                                                        {{ __('hardware_item.rent') }}
                                                                     </button>
                                                                     <button @click="show = 0" type="button"
                                                                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                                                        Cancel
+                                                                        {{ __('hardware_item.cancel') }}
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -720,11 +685,11 @@
                                                 class="text-sm text-gray-900 text-center">{{ $contract->hardware->algoritm->algoritm }}</div>
                                         </td>
                                         <td class="py-4 px-1 text-center">
-                                <span class="
-                                    {{ $Farm::getColor($contract->hardware->profit) }}
-                                    px-1 inline-flex text-xs leading-5 font-semibold rounded-full">
-                                    ${{ number_format($contract->hardware->profit, 2) }}/day
-                                </span>
+                                            <span class="
+                                                {{ $Farm::getColor($contract->hardware->profit) }}
+                                                px-1 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                                ${{ number_format($contract->hardware->profit, 2) }}/{{ __('dashboard._day') }}
+                                            </span>
                                         </td>
                                         <td>
                                             <div style="width:140px;padding:3px 0">
@@ -826,8 +791,8 @@
                                         <td class="px-1 py-4 text-sm text-gray-500">
                                             {{ $contract->created_at->addDays($contract->period->period)->format('d/m/Y') }}
                                         </td>
-                                        <td class="py-4 relative text-sm justify-center flex">
-                                            <a href="/my/{{ $contract->id }}" style="width: 132px;"
+                                        <td class="py-4 relative text-sm justify-center text-center flex">
+                                            <a href="/my/{{ $contract->id }}"
                                                class="py-2 px-4 bg-blue-600 hover:bg-blue-500 flex space-x-1 items-center rounded text-white">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
