@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Newfront;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\CartHelper;
+use App\Http\Requests\PaymentCheckoutRequest;
 use App\Models\Checkout;
 use App\Models\Contract;
 use App\Models\ContractPeriod;
@@ -58,7 +59,7 @@ class CheckoutController extends Controller
         ));
     }
 
-    public function paymentCheckout(Request $request)
+    public function paymentCheckout(PaymentCheckoutRequest $request)
     {
         $paymentSystemId = $request->payment;
 

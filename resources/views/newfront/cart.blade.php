@@ -294,7 +294,7 @@
         </div>
     @endif
 
-
+    @include('layouts.includes.messages')
     <div class="flex space-x-5 cart_payments_block">
 
         <div class="flex-1">

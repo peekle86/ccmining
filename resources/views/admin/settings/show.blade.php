@@ -65,6 +65,14 @@
                     </tr>
                     <tr>
                         <th>
+                            Ruble
+                        </th>
+                        <td>
+                            {{ $setting->ruble_course }} RUB
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.setting.fields.active') }}
                         </th>
                         <td>

@@ -72,6 +72,16 @@
                 @endif
             </div> --}}
             <div class="form-group">
+                <label for="ref">Ruble</label>
+                <input class="form-control {{ $errors->has('ruble_course') ? 'is-invalid' : '' }}" type="number" name="ruble_course" id="ruble_course" value="{{ old('ref', $setting->ruble_course) }}" step="0.01">
+                @if($errors->has('ruble_course'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('ruble_course') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.setting.fields.ref_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <div class="form-check {{ $errors->has('active') ? 'is-invalid' : '' }}">
                     <input class="form-check-input" type="checkbox" name="active" id="active" value="1" {{ $setting->active || old('active', 0) === 1 ? 'checked' : '' }} required>
                     <label class="required form-check-label" for="active">{{ trans('cruds.setting.fields.active') }}</label>
