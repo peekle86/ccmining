@@ -15,6 +15,22 @@ $(document).ready(function () {
         $('input[name="payment"]').val(payment);
     });
 
+    function addErrorsMessages(messages) {
+        $('.validation_messages').html('');
+
+        $.each(messages.responseJSON.errors, function (key, value) {
+            $('.validation_messages').append('<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"><strong class="font-bold">' + value[0] +'</strong></div>');
+        });
+    }
+
+    function addPaymentErrorsMessages(messages) {
+        $('.payment_validation_messages').html('');
+
+        $.each(messages.responseJSON.errors, function (key, value) {
+            $('.payment_validation_messages').append('<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"><strong class="font-bold">' + value[0] +'</strong></div>');
+        });
+    }
+
     /**
      * Відображення блоку підтвердження транзакції
      */
@@ -64,6 +80,43 @@ $(document).ready(function () {
 
         $('#payment_block').remove();
         $('.cart_payments_block').show();
+    });
+
+    /**
+     * Підтвердження транзакції при купівлі
+     */
+    $(document).on('click', '.сonfirm_transaction', function (e) {
+        e.preventDefault();
+
+        $('.transaction_loader').css('display', 'block');
+
+        let csrf = $('meta[name="csrf-token"]').attr('content');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': csrf
+            }
+        });
+
+        var address_id = $('#address').data('address_id');
+        var payment_id = $('#payment_id').val();
+
+        $.ajax({
+            type: "POST",
+            url: 'transaction-verification',
+            data: {
+                'csrf': csrf,
+                'address_id': address_id,
+                'payment_id': payment_id,
+            },
+            success: function (response) {
+                var route = response.route;
+                window.location.href = route;
+
+            }, error: function (xhr) {
+                addPaymentErrorsMessages(xhr);
+            }
+        });
+
     });
 
 

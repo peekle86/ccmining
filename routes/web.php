@@ -44,6 +44,8 @@ Route::prefix(LaravelLocalization::setLocale())->middleware(['localeSessionRedir
 
             Route::group(['middleware' => ['redirect.operator']], function() {
                 Route::post('/payment-checkout', 'CheckoutController@paymentCheckout')->name('payment_checkout');
+                Route::post('transaction-verification', 'CheckoutController@transactionVerification')->name('transaction_verification');
+
                 Route::get('/chat', 'ChatController@index');
                 Route::get('/cart', 'CartController@index')->name('cart');
                 Route::get('/checkout', 'CheckoutController@index')->name('checkout');

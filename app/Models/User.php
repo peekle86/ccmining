@@ -232,17 +232,15 @@ class User extends Authenticatable implements HasMedia
     {
         $total = 0;
 
-        $checkouts = auth()->user()->checkouts()->orderByDesc('id')->with('items.algoritm')->simplePaginate();
-        foreach($checkouts as $checkout) {
-            if( !isset($total[$checkout->id]) ) {
-                $total = 0;
-            }
-            foreach($checkout->items as $item) {
-                $total += $item->pivot->price;
+        $cartItems = auth()->user()->userCart()->orderByDesc('id')->with('items.algoritm')->simplePaginate();
+
+        foreach($cartItems as $cart) {
+            foreach($cart->items as $hardItem) {
+                $total += intval($hardItem->pivot->amount);
             }
         }
 
-        return $total;
+        return number_format($total, 2);
     }
 
 

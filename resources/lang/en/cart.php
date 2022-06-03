@@ -8,5 +8,6 @@ return [
     'contract_table_title' => 'Contract',
     'income' => 'Income',
     'pay' => 'Pay',
-    'total' => 'Total'
+    'total' => 'Total',
+    'pay_out' => 'Pay'
 ];

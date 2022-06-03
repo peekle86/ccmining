@@ -3,8 +3,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 @section('content')
-
     <h1 class="text-2xl font-bold">{{ __('farm._title') }}</h1>
+    @include('layouts.includes.messages')
 
     <div x-data="{ active: {{ $hardware_types->first()->id }} }">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 uppercase max-w-3xl mx-auto text-center">
@@ -712,17 +712,17 @@
                                         </td>
                                         <td class="py-4 px-1">
                                             <div
-                                                    class="text-sm text-gray-900 text-center">{{ $contract->hardware->power }}
+                                                class="text-sm text-gray-900 text-center">{{ $contract->hardware->power }}
                                                 <small class="text-gray-500 ml-0.5">W</small></div>
                                         </td>
                                         <td class="py-4 px-1">
                                             <div
-                                                    class="text-sm text-gray-900 text-center">{{ $contract->hardware->algoritm->algoritm }}</div>
+                                                class="text-sm text-gray-900 text-center">{{ $contract->hardware->algoritm->algoritm }}</div>
                                         </td>
                                         <td class="py-4 px-1 text-center">
                                 <span class="
                                     {{ $Farm::getColor($contract->hardware->profit) }}
-                                        px-1 inline-flex text-xs leading-5 font-semibold rounded-full">
+                                    px-1 inline-flex text-xs leading-5 font-semibold rounded-full">
                                     ${{ number_format($contract->hardware->profit, 2) }}/day
                                 </span>
                                         </td>

@@ -346,7 +346,7 @@
                         data-locale="{{ app()->getLocale() }}"
                         data-url="{{ route('newfront.payment_checkout') }}"
                         class="py-3 bg-blue-600 hover:bg-blue-500 text-white block text-center w-full rounded-lg btn_checkout_form">
-                    <span>Оплатить</span>
+                    <span>{{ __('cart.pay_out') }}</span>
                 </button>
             </div>
         </div>
