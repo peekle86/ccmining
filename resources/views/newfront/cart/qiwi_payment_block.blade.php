@@ -19,7 +19,7 @@
             </a>
         </div>
     </div>
-        <div class="font-bold pt-5">{{ __('cart_blocks.amount_payable') }}: {{ $total }}</h4></div>
+    <div class="font-bold pt-5">{{ __('cart_blocks.amount_payable') }}: {{ $total }}</h4></div>
 
         <div class="flex space-x-5">
             <div class="flex-1">

@@ -15,6 +15,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
+        "iexbase/tron-api": "4.0.*@dev",
         "laravel/dusk": "^6.11",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.8",
@@ -22,6 +23,7 @@
         "laravel/ui": "^3.3",
         "mcamara/laravel-localization": "^1.7",
         "nuovo/spreadsheet-reader": "^0.5.11",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-medialibrary": "^8.7",
         "symfony/dom-crawler": "^5.3",
         "yajra/laravel-datatables-oracle": "^9.18"

@@ -19,7 +19,7 @@ $(document).ready(function () {
         $('.validation_messages').html('');
 
         $.each(messages.responseJSON.errors, function (key, value) {
-            $('.validation_messages').append('<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"><strong class="font-bold">' + value[0] +'</strong></div>');
+            $('.validation_messages').append('<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"><strong class="font-bold">' + value[0] + '</strong></div>');
         });
     }
 
@@ -27,7 +27,7 @@ $(document).ready(function () {
         $('.payment_validation_messages').html('');
 
         $.each(messages.responseJSON.errors, function (key, value) {
-            $('.payment_validation_messages').append('<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"><strong class="font-bold">' + value[0] +'</strong></div>');
+            $('.payment_validation_messages').append('<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"><strong class="font-bold">' + value[0] + '</strong></div>');
         });
     }
 
@@ -97,20 +97,22 @@ $(document).ready(function () {
             }
         });
 
-        var address_id = $('#address').data('address_id');
         var payment_id = $('#payment_id').val();
+        var wallet_id = $('#wallet_id').val();
 
         $.ajax({
             type: "POST",
             url: 'transaction-verification',
             data: {
                 'csrf': csrf,
-                'address_id': address_id,
+                'wallet_id': wallet_id,
                 'payment_id': payment_id,
             },
             success: function (response) {
                 var route = response.route;
-                window.location.href = route;
+                if (route) {
+                    window.location.href = route;
+                }
 
             }, error: function (xhr) {
                 addPaymentErrorsMessages(xhr);

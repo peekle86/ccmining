@@ -20,6 +20,12 @@ class WalletNetwork extends Model
         'deleted_at',
     ];
 
+    /**
+     * Network
+     */
+    const BTC = 1;
+    const USDT = 4;
+
     protected $fillable = [
         'name',
         'symbol',
