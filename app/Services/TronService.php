@@ -48,8 +48,7 @@ class TronService
          *  $unix = strtotime('2022-03-23 18:00:12');
          *
          */
-        $unix = strtotime('2022-03-23 18:00:12');
-//        $unix = Carbon::now()->timestamp;
+        $unix = Carbon::now()->timestamp;
         Log::info("unix: " . $unix);
         Log::info("unix_date: " . date('Y-m-d H:i:s', $unix));
         $timestamp = $unix + 3600;

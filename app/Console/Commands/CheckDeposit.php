@@ -2,12 +2,14 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Setting;
 use Carbon\Carbon;
 use App\Models\Checkout;
 use App\Models\Contract;
 use App\Models\ContractPeriod;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\DomCrawler\Crawler;
 
 class CheckDeposit extends Command
@@ -49,6 +51,11 @@ class CheckDeposit extends Command
             $this->checkExplorer($checkout);
         }
 
+        $setting = Setting::first();
+        $setting->updated_at = Carbon::now()->addHours(3);
+        $setting->update();
+
+        Log::info(Carbon::now()->addHours(3) . '_' . 'Cron Start'. "\n");
         return Command::SUCCESS;
     }
 

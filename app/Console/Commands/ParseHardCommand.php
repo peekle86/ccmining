@@ -9,6 +9,7 @@ use App\Models\Setting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ParseHardCommand extends Command
@@ -72,7 +73,11 @@ class ParseHardCommand extends Command
         //     }
         // }
 
+        $setting = Setting::first();
+        $setting->updated_at = Carbon::now()->addHours(3);
+        $setting->update();
 
+        Log::info(Carbon::now()->addHours(3) . '_' . 'Cron Start'. "\n");
         return Command::SUCCESS;
     }
 

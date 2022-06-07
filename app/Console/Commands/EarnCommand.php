@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\Contract;
 use App\Models\Setting;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class EarnCommand extends Command
 {
@@ -79,6 +80,11 @@ class EarnCommand extends Command
         //         $contract->save();
         //     }
         // }
+        $setting = Setting::first();
+        $setting->updated_at = Carbon::now()->addHours(3);
+        $setting->update();
+
+        Log::info(Carbon::now()->addHours(3) . '_' . 'Cron Start'. "\n");
         return Command::SUCCESS;
     }
 

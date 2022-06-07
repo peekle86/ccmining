@@ -88,7 +88,9 @@
                         <div class="col-md-6">
                             Latest hardware parsing: {{ optional($last_parsing_time)->updated_at }}
                         </div>
-
+                        <div class="col-md-6">
+                            Cron last started: {{ \App\Models\Setting::first()->updated_at }}
+                        </div>
                         <div class="col-md-6">
 
                         </div>

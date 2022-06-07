@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use App\Models\Currency;
+use App\Models\Setting;
 use App\Models\WalletNetwork;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class parseCrypto extends Command
 {
@@ -65,7 +68,11 @@ class parseCrypto extends Command
 
 
 
+        $setting = Setting::first();
+        $setting->updated_at = Carbon::now()->addHours(3);
+        $setting->update();
 
+        Log::info(Carbon::now()->addHours(3) . '_' . 'Cron Start'. "\n");
         return Command::SUCCESS;
     }
 }

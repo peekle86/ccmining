@@ -28,8 +28,7 @@ class BitcoinService
          *  $unix = strtotime('2022-04-08 17:00:00');
          *
          */
-        $unix = strtotime('2022-04-08 17:00:00');
-//        $unix = Carbon::now()->timestamp;
+        $unix = Carbon::now()->timestamp;
         Log::info("unix: " . $unix);
         Log::info("unix_date: " . date('Y-m-d H:i:s', $unix));
         Session::put('payment_btc_timestamp', $unix);

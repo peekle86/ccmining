@@ -213,9 +213,8 @@ class CheckoutController extends Controller
 
         } elseif ($request->payment_id == PaymentSystem::USDT) {
 
-//            $total = \App\Models\User::getUserCheckoutTotal();
-            $total = 1;
-            $checkout = auth()->user()->checkouts()->whereStatus(0)->first();
+            $total = \App\Models\User::getUserCheckoutTotal();
+            $checkout = auth()->user()->checkouts()->whereStatus(1)->first();
             $wallet = Wallet::find($request->wallet_id);
 
             $checkTransactions = TronService::checkTransactions($wallet);
@@ -281,9 +280,8 @@ class CheckoutController extends Controller
             }
         } elseif ($request->payment_id == PaymentSystem::BTC) {
 
-//            $total = \App\Models\User::getUserCheckoutTotal();
-            $total = 1;
-            $checkout = auth()->user()->checkouts()->whereStatus(0)->first();
+            $total = \App\Models\User::getUserCheckoutTotal();
+            $checkout = auth()->user()->checkouts()->whereStatus(1)->first();
             $wallet = Wallet::find($request->wallet_id);
 
             $checkTransaction = BitcoinService::checkTransactions($total, $wallet);

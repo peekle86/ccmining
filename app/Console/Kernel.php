@@ -9,6 +9,7 @@ use App\Console\Commands\parseCrypto;
 use App\Console\Commands\ParseHardCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -18,11 +19,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        CheckTransactions::class,
         ParseHardCommand::class,
         parseCrypto::class,
         EarnCommand::class,
         CheckDeposit::class,
-        CheckTransactions::class
     ];
 
     /**
@@ -33,11 +34,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('check:transactions')->everyMinute();
         $schedule->command('parse:hard')->everyMinute();
         $schedule->command('parse:crypto')->everyMinute();
         $schedule->command('earn:profit')->everyMinute();
         $schedule->command('check:deposit')->everyMinute();
-        $schedule->command('check:transactions')->everyMinute();
     }
 
     /**
