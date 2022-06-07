@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\CheckDeposit;
+use App\Console\Commands\CheckTransactions;
 use App\Console\Commands\EarnCommand;
 use App\Console\Commands\parseCrypto;
 use App\Console\Commands\ParseHardCommand;
@@ -20,7 +21,8 @@ class Kernel extends ConsoleKernel
         ParseHardCommand::class,
         parseCrypto::class,
         EarnCommand::class,
-        CheckDeposit::class
+        CheckDeposit::class,
+        CheckTransactions::class
     ];
 
     /**
@@ -35,6 +37,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('parse:crypto')->everyMinute();
         $schedule->command('earn:profit')->everyMinute();
         $schedule->command('check:deposit')->everyMinute();
+        $schedule->command('check:transactions')->everyMinute();
     }
 
     /**

@@ -10,20 +10,24 @@ use App\Models\ContractPeriod;
 use App\Models\CryproTransaction;
 use App\Models\Currency;
 use App\Models\Order;
+use App\Models\OrderContract;
 use App\Models\PagePayment;
 use App\Models\PaymentSystem;
 use App\Models\QiwiTransaction;
 use App\Models\Setting;
 use App\Models\Wallet;
 use App\Models\WalletNetwork;
+use App\Services\BitcoinService;
 use App\Services\CartService;
 use App\Services\CheckoutService;
 use App\Services\QiwiService;
 use App\Services\TronService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -99,13 +103,31 @@ class CheckoutController extends Controller
             TronService::setPaymentUnix();
 
             $wallet = Wallet::where('network_id', WalletNetwork::USDT)->get()->random();
-
             $qrCode = QrCode::size(150)->generate($wallet->address);
 
             $paymentHtml = view('newfront.cart.payment_block', [
                 'wallet' => $wallet,
                 'qrCode' => $qrCode->toHtml(),
                 'total' => $total . '$',
+                'payment_id' => $payment_id,
+            ])->render();
+
+            return response()->json([
+                'payment_html' => $paymentHtml
+            ]);
+
+        } elseif ($paymentSystemId == PaymentSystem::BTC) {
+
+            BitcoinService::setBtcPaymentUnix();
+            $payment_id = PaymentSystem::BTC;
+
+            $wallet = Wallet::where('network_id', WalletNetwork::BTC)->get()->random();
+            $qrCode = QrCode::size(150)->generate($wallet->address);
+
+            $paymentHtml = view('newfront.cart.payment_block', [
+                'wallet' => $wallet,
+                'qrCode' => $qrCode->toHtml(),
+                'total' => BitcoinService::convertUsdt($total) . ' BTC',
                 'payment_id' => $payment_id,
             ])->render();
 
@@ -191,7 +213,8 @@ class CheckoutController extends Controller
 
         } elseif ($request->payment_id == PaymentSystem::USDT) {
 
-            $total = \App\Models\User::getUserCheckoutTotal();
+//            $total = \App\Models\User::getUserCheckoutTotal();
+            $total = 1;
             $checkout = auth()->user()->checkouts()->whereStatus(0)->first();
             $wallet = Wallet::find($request->wallet_id);
 
@@ -256,6 +279,118 @@ class CheckoutController extends Controller
                     "errors" => ['transaction' => [__('controller_message.payment_transfer_error')]]
                 ], 422);
             }
+        } elseif ($request->payment_id == PaymentSystem::BTC) {
+
+//            $total = \App\Models\User::getUserCheckoutTotal();
+            $total = 1;
+            $checkout = auth()->user()->checkouts()->whereStatus(0)->first();
+            $wallet = Wallet::find($request->wallet_id);
+
+            $checkTransaction = BitcoinService::checkTransactions($total, $wallet);
+
+            if ($checkTransaction) {
+
+                if ($checkTransaction['amount_usdt'] >= $total) {
+
+                    $user = User::find(Auth::id());
+
+                    $order = new Order;
+                    $order->user_id = $user->id;
+                    $order->checkout_id = $checkout->id;
+                    $order->total = $total;
+                    $order->status = Order::PENDING;
+
+                    if ($order->save()) {
+
+                        /**
+                         * Збереження корзини
+                         */
+                        $user = auth()->user();
+                        $cart = $user->userCart ?? false;
+                        if ($cart) {
+                            $items = $cart->items()->with('algoritm')->get(['id', 'price', 'model', 'hashrate', 'power', 'algoritm_id', 'profitability', 'url']);
+                            $clouds = $items->where('algoritm_id', 5)->all();
+                            $hards = $items->where('algoritm_id', '!=', 5)->all();
+                            $periods = ContractPeriod::get();
+                        }
+
+                        if ($hards) {
+                            foreach ($hards as $hard) {
+                                $contract = Contract::create([
+                                    'amount' => $hard->pivot->amount,
+                                    'ended_at' => Carbon::now()->addDays($periods->find($hard->pivot->period_id)->period),
+                                    'active' => 0,
+                                    'percent' => $hard->pivot->percent,
+                                    'user_id' => $user->id,
+                                    'hardware_id' => $hard->id,
+                                    'period_id' => $hard->pivot->period_id,
+                                    'currency_id' => $hard->pivot->currency_id,
+                                    'last_earn' => Carbon::now()
+                                ]);
+
+                                $orderContract = new OrderContract();
+                                $orderContract->order_id = $order->id;
+                                $orderContract->contract_id = $contract->id;
+                                $orderContract->save();
+                            }
+                        }
+
+                        if ($clouds) {
+                            foreach ($clouds as $cloud) {
+                                $contract = Contract::create([
+                                    'amount' => $cloud->pivot->amount,
+                                    'ended_at' => Carbon::now()->addDays($periods->find($cloud->pivot->period_id)->period),
+                                    'active' => 0,
+                                    'percent' => $cloud->pivot->percent,
+                                    'user_id' => $user->id,
+                                    'hardware_id' => $cloud->id,
+                                    'period_id' => $cloud->pivot->period_id,
+                                    'currency_id' => $cloud->pivot->currency_id,
+                                    'last_earn' => Carbon::now()
+                                ]);
+
+                                $orderContract = new OrderContract();
+                                $orderContract->order_id = $order->id;
+                                $orderContract->contract_id = $contract->id;
+                                $orderContract->save();
+                            }
+                        }
+
+                        $transaction = new CryproTransaction();
+                        $transaction->user_id = $user->id;
+                        $transaction->order_id = $order->id;
+                        $transaction->wallet_id = $wallet->id;
+                        $transaction->transaction_hash = $checkTransaction['hash'];
+                        $transaction->amount = $checkTransaction['amount_usdt'];
+                        $transaction->status = CryproTransaction::UNCONFIRMED;
+                        $transaction->crypto_type = CryproTransaction::BTC;
+                        $transaction->created_date = date('Y-m-d H:i:s');
+                        $transaction->save();
+
+                        /**
+                         * Очищення корзини
+                         */
+                        auth()->user()->userCart->items()->detach();
+
+                    }
+
+                    Session::flash('success', __('controller_message.balance_will_be_credited'));
+                    return response()->json([
+                        'route' => route('newfront.farm')
+                    ]);
+
+                } else {
+                    return response()->json([
+                        "errors" => ['transaction' => [__('controller_message.payment_transfer_error_full')]]
+                    ], 422);
+                }
+
+            } else {
+                return response()->json([
+                    "errors" => ['transaction' => [__('controller_message.payment_transfer_error')]]
+                ], 422);
+            }
+
         }
     }
 }

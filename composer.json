@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "amrshawky/laravel-currency": "^5.0",
         "barryvdh/laravel-translation-manager": "^0.6.1",
         "bugsnag/bugsnag-laravel": "^2.21",
         "doctrine/dbal": "^3.0",

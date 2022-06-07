@@ -24,4 +24,9 @@ class Order extends Model
       'total',
       'status',
     ];
+
+    public function contracts()
+    {
+        return $this->belongsToMany(Contract::class, 'orders_contracts',  'order_id', 'contract_id');
+    }
 }

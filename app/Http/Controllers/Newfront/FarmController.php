@@ -28,7 +28,7 @@ class FarmController extends Controller
             $hardware_available[$hard->algoritm->id][] = $hard;
         }
 
-        $hard_my = $user->userContracts()->with('hardware')->get();
+        $hard_my = $user->userContracts()->whereActive(1)->with('hardware')->get();
         foreach( $hard_my as $hard ) {
             $hardware_my[$hard->hardware->algoritm->id][] = $hard;
         }
