@@ -41,7 +41,7 @@
                         </th>
                         <th scope="col"
                             class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            {{ __('cart.pay') }}
+                            {{ __('cart.income') }}
                         </th>
                         <th scope="col"
                             class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
