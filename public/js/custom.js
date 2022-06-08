@@ -121,6 +121,47 @@ $(document).ready(function () {
 
     });
 
+    /**
+     * Copy
+     * @param text
+     */
+    function copyToClipboard(text) {
+        var sampleTextarea = document.createElement("textarea");
+        document.body.appendChild(sampleTextarea);
+        sampleTextarea.value = text;
+        sampleTextarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(sampleTextarea);
+    }
+
+    function copyInput(input)
+    {
+        input.css('color', 'green');
+        setTimeout(function () {
+            input.css('color', '#3b82f6');
+        }, 2000);
+    }
+
+    $(document).on('click', '.wallet_copy', function (e) {
+        var inputCopy = $('#wallet');
+        var inputCopyVal = inputCopy.val();
+
+        copyToClipboard(inputCopyVal);
+        copyInput(inputCopy)
+
+    });
+
+    $(document).on('click', '.amount_copy', function (e) {
+        var inputCopy = $('#amount');
+        var inputCopyVal = inputCopy.val();
+
+        copyToClipboard(inputCopyVal);
+        copyInput(inputCopy)
+
+    });
+
+
+
 
 });
 

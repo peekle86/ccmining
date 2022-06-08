@@ -108,7 +108,8 @@ class CheckoutController extends Controller
             $paymentHtml = view('newfront.cart.payment_block', [
                 'wallet' => $wallet,
                 'qrCode' => $qrCode->toHtml(),
-                'total' => $total . '$',
+                'total' => $total,
+                'payment_type' => ' $',
                 'payment_id' => $payment_id,
             ])->render();
 
@@ -127,7 +128,8 @@ class CheckoutController extends Controller
             $paymentHtml = view('newfront.cart.payment_block', [
                 'wallet' => $wallet,
                 'qrCode' => $qrCode->toHtml(),
-                'total' => BitcoinService::convertUsdt($total) . ' BTC',
+                'total' => BitcoinService::convertUsdt($total),
+                'payment_type' => ' BTC',
                 'payment_id' => $payment_id,
             ])->render();
 

@@ -5,24 +5,36 @@
 
     <div class="text-lg font-bold pt-5"> {{ __('cart_blocks.top_up_address') }}:</div>
 
-
-    <div class="flex space-x-5">
-        <div>
-            <div class="referal__start text-left">
-                {!! $qrCode !!}
-            </div>
-        </div>
-    </div>
     <div class="flex space-x-5">
         <div class="flex-1">
             <input id="payment_id" type="hidden" value="{{ $payment_id }}">
             <input id="wallet_id" type="hidden" name="wallet_id" value="{{ $wallet->id }}">
-            <input type="text"
-                   class="text-blue-500 w-full md:w-1/2 lg:w-3/3 font-bold py-2 px-4 text-left rounded"
-                   value="{{ $wallet->address }}" readonly>
+            <div class="font-bold pt-5">{{ __('cart_blocks.wallet') }}:
+                <input id="wallet" type="text"
+                       class="text-blue-500 w-full md:w-2/3 lg:w-3/3 font-bold py-2 px-4 text-left rounded"
+                       value="{{ $wallet->address }}" readonly>
+                <button class="border-2 text-white-500 border-white-400 hover:text-green-400 hover:border-green-300 text-white font-bold py-2 px-4 wallet_copy rounded">
+                    {{ __('cart_blocks.copy') }}
+                </button>
+
+            </div>
+            <div class="font-bold pt-5">{{ __('cart_blocks.amount_payable') }} {{ $payment_type }}:
+                <input id="amount" type="text"
+                       class="text-blue-500 w-full md:w-1/4 lg:w-3/3 font-bold py-2 px-4 text-left rounded"
+                       value="{{ $total }}" readonly>
+                <button class="border-2 text-white-500 border-white-400 hover:text-green-400 hover:border-green-300 text-white font-bold py-2 px-4 amount_copy rounded">
+                    {{ __('cart_blocks.copy') }}
+                </button>
+            </div>
+        </div>
+        <div class="flex-1">
+            <div>
+                <div class="referal__start text-center">
+                    {!! $qrCode !!}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="font-bold pt-5">{{ __('cart_blocks.amount_payable') }}: {{ $total }}</h4></div>
 
     <div class="flex space-x-5">
         <div class="flex-1">
