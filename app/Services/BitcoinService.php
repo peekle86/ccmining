@@ -5,12 +5,10 @@ namespace App\Services;
 
 
 use AmrShawky\Currency;
-use App\Models\PaymentSystem;
 use App\Models\UserCryptoAddress;
 use App\Models\UserTransaction;
 use Carbon\Carbon;
 use Darryldecode\Cart\Facades\CartFacade;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
@@ -99,24 +97,33 @@ class BitcoinService
      */
     public static function convertUsdt($usd)
     {
-        $amount = Currency::convert()
-            ->from('USD')
-            ->to('BTC')
-            ->amount($usd)
-            ->round(7)
-            ->get();
+        $usd = str_replace(",", "", $usd);
+        try {
+            $amount = Currency::convert()
+                ->from('USD')
+                ->to('BTC')
+                ->amount($usd)
+                ->round(7)
+                ->get();
 
+        } catch (\Throwable $th) {
+            $amount = 0;
+        }
         return $amount;
     }
 
     public static function convertBTC($btc)
     {
-        $amount = Currency::convert()
-            ->from('BTC')
-            ->to('USD')
-            ->amount($btc)
-            ->round(2)
-            ->get();
+        try {
+            $amount = Currency::convert()
+                ->from('BTC')
+                ->to('USD')
+                ->amount($btc)
+                ->round(2)
+                ->get();
+        } catch (\Throwable $th) {
+            $amount = 0;
+        }
 
         return $amount;
     }
