@@ -240,7 +240,7 @@ class User extends Authenticatable implements HasMedia
             }
         }
 
-        return number_format($total, 2);
+        return str_replace(",", "", $total);
     }
 
 

@@ -15,6 +15,7 @@ class SettingService
      */
     public static function convertAmountToRuble($amount)
     {
+        $amount = str_replace(",", "", $amount);
         $ruble = Setting::pluck('ruble_course')->first();
 
         return $amount * $ruble;
@@ -27,6 +28,7 @@ class SettingService
      */
     public static function convertAmountToUsd($amount)
     {
+        $amount = str_replace(",", "", $amount);
         $ruble = Setting::pluck('ruble_course')->first();
 
         return $amount / $ruble;
