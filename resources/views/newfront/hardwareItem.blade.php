@@ -283,11 +283,10 @@
             </div>
 
             <div class="flex-1 minable-coins">
-
                 <div class="bg-white rounded-lg border p-6 shadow space-y-4">
                     <h2 class="text-2xl mb-1">{{ __('hardware_item.minable_coins') }}</h2>
                     <div>
-                        {!! $hardwareItem->coins ?? '' !!}
+                        {!! str_replace('Scrypt', '', $hardwareItem->coins) !!}
                         <div class="clear-both"></div>
                     </div>
                 </div>

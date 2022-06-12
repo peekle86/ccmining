@@ -168,7 +168,7 @@
                                 @forelse ($hardware_type as $contract)
                                     <tr>
                                         <td class="py-4 px-1 text-center">
-                                            <div class="text-sm text-blue-600">
+                                            <div class="text-sm" style="color: #027cef">
                                                 {{ $contract->hardware->model }}
                                             </div>
                                         </td>
@@ -308,8 +308,8 @@
                                 @foreach ($hardware_type as $hard)
                                     <tr>
                                         <td class="py-4 px-1">
-                                            <div class="text-sm text-blue-600" style="width: 250px">
-                                                <a href="{{ $hard->url }}">{{ $hard->model }}</a>
+                                            <div class="text-sm" style="width: 250px">
+                                                <a class="assic_title" href="{{ $hard->url }}">{{ $hard->model }}</a>
                                             </div>
                                         </td>
                                         <td class="py-4 px-1">
