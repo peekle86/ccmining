@@ -38,19 +38,19 @@
         <div class="w-full space-x-3 flex-grow xl:flex xl:items-center xl:w-auto hidden mt-2 xl:mt-0 main-bg-color xl:bg-transparent text-black p-4 xl:p-0 z-20" id="nav-content">
           <ul class="list-reset xl:flex justify-center flex-1 items-center">
             <li class="mr-3">
-                <a class="inline-block py-2 px-4 text-white no-underline" href="/blog/news/">{{ __('welcome.blog') }}</a>
+                <a class="inline-block py-2 px-4 text-white no-underline" href="{{ route('blog.blog_category', 'news') }}">{{ __('welcome.blog') }}</a>
               </li>
             <li class="mr-3">
-              <a class="inline-block py-2 px-4 text-white no-underline" href="/faq">{{ __('welcome.faq') }}</a>
+              <a class="inline-block py-2 px-4 text-white no-underline" href="{{ route('newfront.faq') }}">{{ __('welcome.faq') }}</a>
             </li>
             <li class="mr-3">
-                <a class="inline-block py-2 px-4 text-white no-underline" href="/about">{{ __('welcome.our_team') }}</a>
+                <a class="inline-block py-2 px-4 text-white no-underline" href="{{ route('newfront.about') }}">{{ __('welcome.our_team') }}</a>
             </li>
             <li class="mr-3">
-                <a class="inline-block py-2 px-4 text-white no-underline" href="/contact">{{ __('welcome.contact_us') }}</a>
+                <a class="inline-block py-2 px-4 text-white no-underline" href="{{ route('newfront.contact') }}">{{ __('welcome.contact_us') }}</a>
             </li>
             <li class="mr-3">
-              <a class="inline-block py-2 px-4 text-white no-underline" href="/affiliate">{{ __('welcome.affiliate') }}</a>
+              <a class="inline-block py-2 px-4 text-white no-underline" href="{{ route('affiliate') }}">{{ __('welcome.affiliate') }}</a>
             </li>
           </ul>
 

@@ -5,7 +5,7 @@ use App\Notifications\VerifyUserNotification;
 
 Route::prefix(LaravelLocalization::setLocale())->middleware(['localeSessionRedirect', 'localizationRedirect'])->group(function () {
     Route::get('/', 'WelcomeController@index')->name('welcome');
-    Route::view('/affiliate', 'static.affiliate');
+    Route::view('/affiliate', 'static.affiliate')->name('affiliate');
     // Route::view('/privacy', 'static.privacy');
     // Route::view('/refund', 'static.refund');
     //Route::view('/terms', 'static.terms');
@@ -16,12 +16,12 @@ Route::prefix(LaravelLocalization::setLocale())->middleware(['localeSessionRedir
     Route::group(['as' => 'newfront.', 'namespace' => 'Newfront'], function () {
 
 
-        Route::get('/faq', 'FaqController@index');
+        Route::get('/faq', 'FaqController@index')->name('faq');
         Route::get('/contact', 'ContactController@index')->name('contact');
         Route::post('/contact', 'ContactController@contactPost')->name('contactPost');
         Route::post('/chat-init', 'ChatController@chat_init');
         Route::post('/chat', 'ChatController@ajaxRequestPost');
-        Route::get('/about', 'AboutController@index');
+        Route::get('/about', 'AboutController@index')->name('about');
 
         Route::group(['middleware' => ['auth']], function() {
 
@@ -81,7 +81,7 @@ Route::prefix(LaravelLocalization::setLocale())->middleware(['localeSessionRedir
 
     Route::group(['as' => 'blog.', 'namespace' => 'Blog'], function() {
         Route::get('blog/{category}/{slug}', 'BlogController@index');
-        Route::get('blog/{category}', 'BlogController@category');
+        Route::get('blog/{category}', 'BlogController@category')->name('blog_category');
     });
 
 
