@@ -13,7 +13,7 @@
                 <input id="wallet" type="text"
                        class="text-blue-500 w-full md:w-2/3 lg:w-3/3 font-bold py-2 px-4 text-left rounded"
                        value="{{ $wallet->address }}" readonly>
-                <button class="border-2 text-white-500 border-white-400 hover:text-green-400 hover:border-green-300 text-white font-bold py-2 px-4 wallet_copy rounded">
+                <button class="border-2 text-white-500 border-white-400 hover:text-green-400 hover:border-green-300 text-white font-bold py-2 px-4 mt-2 wallet_copy rounded">
                     {{ __('cart_blocks.copy') }}
                 </button>
 
@@ -22,7 +22,7 @@
                 <input id="amount" type="text"
                        class="text-blue-500 w-full md:w-1/4 lg:w-3/3 font-bold py-2 px-4 text-left rounded"
                        value="{{ $total }}" readonly>
-                <button class="border-2 text-white-500 border-white-400 hover:text-green-400 hover:border-green-300 text-white font-bold py-2 px-4 amount_copy rounded">
+                <button class="border-2 text-white-500 border-white-400 hover:text-green-400 hover:border-green-300 text-white font-bold py-2 px-4 mt-2 amount_copy rounded">
                     {{ __('cart_blocks.copy') }}
                 </button>
             </div>

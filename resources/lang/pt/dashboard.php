@@ -4,7 +4,7 @@ return [
     '_dashboard' => 'Кабинет',
     '_description' => 'Описание',
     '_farm' => 'Ферма',
-    '_affiliate' => 'Партнер',
+    '_affiliate' => 'Партнерская программ',
     '_profile' => 'Профиль',
     '_support' => 'Поддержка',
     '_my_hardware' => 'Мое оборудование',

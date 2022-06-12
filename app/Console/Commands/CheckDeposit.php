@@ -99,61 +99,65 @@ class CheckDeposit extends Command
     protected function checkExplorer($checkout)
     {
         $amount = 0;
-        $address = $checkout->user->userWallet->address;
 
-        $time_start = $checkout->created_at->timestamp;
-        $time_end = $checkout->created_at->addHours(1)->timestamp;
+        if ($checkout->user->userWallet) {
 
-        foreach($checkout->items as $item) {
-            $amount += $item->pivot->price;
-        }
+            $address = $checkout->user->userWallet->address;
 
-        $btc = number_format($amount / $checkout->btc_price, 8);
-        $satoshi = intval(($btc)*(pow(10, 8)));
+            $time_start = $checkout->created_at->timestamp;
+            $time_end = $checkout->created_at->addHours(1)->timestamp;
 
-        try {
-            $response = Http::get("https://www.blockchain.com/btc/address/{$address}");
-            $crawler = new Crawler($response->body());
-            $data = json_decode($crawler->filter('script#__NEXT_DATA__')->text())->props->initialProps->pageProps;
+            foreach ($checkout->items as $item) {
+                $amount += $item->pivot->price;
+            }
 
-            if( $data->addressTransactions ) {
-                foreach($data->addressTransactions as $transaction) {
+            $btc = number_format($amount / $checkout->btc_price, 8);
+            $satoshi = intval(($btc) * (pow(10, 8)));
 
-                    $trans = array_filter($transaction->outputs, function($out) use ($address, $time_start, $time_end, $satoshi, $transaction) {
-                        return $out->address == $address
-                            && $transaction->time >= $time_start
-                            && $transaction->time <= $time_end
-                            && $out->value == $satoshi;
-                    });
+            try {
+                $response = Http::get("https://www.blockchain.com/btc/address/{$address}");
+                $crawler = new Crawler($response->body());
+                $data = json_decode($crawler->filter('script#__NEXT_DATA__')->text())->props->initialProps->pageProps;
 
-                    if( $trans ) {
+                if ($data->addressTransactions) {
+                    foreach ($data->addressTransactions as $transaction) {
 
-                        if( ! $checkout->tx && ! Checkout::where('tx', $transaction->txid)->first() ) {
-                            $checkout->tx = $transaction->txid;
-                            if( $checkout->user->userCart ) {
-                                $checkout->user->userCart->delete();
+                        $trans = array_filter($transaction->outputs, function ($out) use ($address, $time_start, $time_end, $satoshi, $transaction) {
+                            return $out->address == $address
+                                && $transaction->time >= $time_start
+                                && $transaction->time <= $time_end
+                                && $out->value == $satoshi;
+                        });
+
+                        if ($trans) {
+
+                            if (!$checkout->tx && !Checkout::where('tx', $transaction->txid)->first()) {
+                                $checkout->tx = $transaction->txid;
+                                if ($checkout->user->userCart) {
+                                    $checkout->user->userCart->delete();
+                                }
+
+                                $checkout->save();
                             }
 
-                            $checkout->save();
-                        }
-
-                        if( $checkout->tx && isset($transaction->block->height) ) {
-                            $this->aprove($checkout);
-                            break;
-                        }
-                    } else {
-                        if( $checkout->created_at->addHours(1)->timestamp < Carbon::now()->timestamp ) {
-                            $checkout->delete();
+                            if ($checkout->tx && isset($transaction->block->height)) {
+                                $this->aprove($checkout);
+                                break;
+                            }
+                        } else {
+                            if ($checkout->created_at->addHours(1)->timestamp < Carbon::now()->timestamp) {
+                                $checkout->delete();
+                            }
                         }
                     }
+                } else {
+                    if ($checkout->created_at->addHours(1)->timestamp < Carbon::now()->timestamp) {
+                        $checkout->delete();
+                    }
                 }
-            } else {
-                if( $checkout->created_at->addHours(1)->timestamp < Carbon::now()->timestamp ) {
-                    $checkout->delete();
-                }
+            } catch (\Throwable $th) {
+                //throw $th;
             }
-        } catch (\Throwable $th) {
-            //throw $th;
         }
     }
 }

@@ -165,7 +165,7 @@ class CheckoutController extends Controller
                 'active' => 1,
                 'percent' => $item->pivot->percent,
                 'amount' => $item->pivot->price,
-                'last_earn' => Carbon::now()
+                'last_earn' => date('Y-m-d H:i:s'),
             ]);
         }
 

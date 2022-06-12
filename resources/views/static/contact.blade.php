@@ -60,7 +60,7 @@
           <div>
               <h4>{{ __('welcome.i_dep') }}</h4>
               <p>
-                <a href="mailto:contact@international@ccgmining.com">contact@international@ccgmining.com</a>
+                <a href="https://ccmining.net/ru/contact">https://ccmining.net/ru/contact</a>
               </p>
           </div>
         </div>

@@ -36,6 +36,8 @@
             <ul class="space-y-3">
                 <li>
                     <span class="font-bold">E-mail:</span> {{ $user->email }}
+                </li>
+                <li>
                     @if( $user->verified )
                         <span class="rounded p-2 bg-green-50 text-green-500">{{ __('dashboard._verif') }}</span>
                     @else
@@ -48,7 +50,6 @@
                         </span>
                     @endif
                 </li>
-
                 <li>
                     <span class="font-bold">{{ __('dashboard._registration_date') }}:</span> {{ $user->created_at }}
                 </li>
