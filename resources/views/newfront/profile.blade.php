@@ -45,7 +45,9 @@
                         <span>
                             <form action="/verify-email" method="post">
                                 @csrf
-                                <button class="text-white hover:bg-blue-400 bg-blue-500 rounded px-3 py-1" type="submit">{{ __('dashboard._send_conf_email') }}</button>
+                                <button class="text-white hover:bg-blue-400 bg-blue-500 rounded px-3 py-1"
+                                        style="margin-top: 20px;"
+                                        type="submit">{{ __('dashboard._send_conf_email') }}</button>
                             </form>
                         </span>
                     @endif
