@@ -48,11 +48,12 @@
                 <div class="flex-1">
                     <div class="font-bold">{{ __('welcome.o_off') }}</div>
                     <ul class="text-gray-300 pt-4 leading-8">
-                        <li>Cryptonite Crypto Cloud Mining Solutions Limited</li>
-                        <li>8 Shepherd Market</li>
-                        <li>London</li>
-                        <li>W1J 7QE</li>
-                        <li>Company No. 13299796</li>
+                        <li>International department:</li>
+                        <li><a href="mailto:International@ccgmining.net">International@ccgmining.net</a></li>
+                        <li>B2B department</li>
+                        <li>b2b@ccgmining.net</li>
+                        <li>Finance department</li>
+                        <li><a href="mailto:finance@ccgmining.net">finance@ccgmining.net</a></li>
                     </ul>
 
                 </div>
@@ -66,7 +67,7 @@
                         <li><a href="/terms">{{ __('welcome.r_aml') }} »</a></li>
                         <li><a href="/refund">{{ __('welcome.r_risk') }} »</a></li>
                     </ul>
-                    <div>2021 © Bithash Mining LTD</div>
+                    <div>{{ date('Y') }} © Bithash Mining LTD</div>
                 </div>
 
                 <div class="flex-1 space-y-3">

@@ -46,7 +46,7 @@ return [
     '_period' => 'Period',
     '_earn_in' => 'Earn In',
     '_checkout' => 'Checkout',
-    '_added_cart' => 'Added to cart',
+    '_added_cart' => 'Mining contract added to cart',
     '_verif' => 'Veriffied',
     '_no_verif' => 'Not Veriffied',
     '_send_conf_email' => 'Send confirmation email',

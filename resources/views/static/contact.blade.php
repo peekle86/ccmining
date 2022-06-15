@@ -13,11 +13,12 @@
             <div>
                 <h4>{{ __('welcome.cont') }}</h4>
                 <ul>
-                    <li>Cryptonite Crypto Cloud Mining Solutions Limited</li>
-                    <li>8 Shepherd Market</li>
-                    <li>London</li>
-                    <li>W1J 7QE</li>
-                    <li>Company No. 13299796</li>
+                    <li>International department:</li>
+                    <li><a href="mailto:International@ccgmining.net">International@ccgmining.net</a></li>
+                    <li>B2B department</li>
+                    <li>b2b@ccgmining.net</li>
+                    <li>Finance department</li>
+                    <li><a href="mailto:finance@ccgmining.net">finance@ccgmining.net</a></li>
                 </ul>
             </div>
           </div>

@@ -46,7 +46,7 @@
         'toc' => 'TERMS & CONDITIONS',
         'r_toc' => 'read terms & conditions',
         'r_priv' => 'read privacy policy',
-        'r_aml' => 'read our AML/NYC policy',
+        'r_aml' => 'read our AML/KYC policy',
         'r_risk' => 'read risk agreement policy',
         'f_us' => 'FOLLOW US',
         'sel_ghs' => 'Select desired GH/s',
