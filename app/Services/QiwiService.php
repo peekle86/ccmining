@@ -55,7 +55,7 @@ class QiwiService
     {
         $link = "https://qiwi.com/payment/form/$paymentCode?extra['account']=$qiwiLink->nickname&";
 
-        if (is_float($convertAmount)) {
+        if ($convertAmount) {
             $amount = explode('.', $convertAmount);
 
             if (isset($amount[0])) {
