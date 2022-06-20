@@ -18,7 +18,7 @@ class SettingService
         $amount = str_replace(",", "", $amount);
         $ruble = Setting::pluck('ruble_course')->first();
 
-        return $amount * $ruble;
+        return round($amount * $ruble, 2);
     }
 
     /**
@@ -31,6 +31,6 @@ class SettingService
         $amount = str_replace(",", "", $amount);
         $ruble = Setting::pluck('ruble_course')->first();
 
-        return $amount / $ruble;
+        return round($amount / $ruble, 2);
     }
 }
